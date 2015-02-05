@@ -1,9 +1,9 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: mainCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('loginFormApp'));
+  beforeEach(module('loginApp'));
 
   var MainCtrl,
     scope;
@@ -11,22 +11,13 @@ describe('Controller: MainCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    MainCtrl = $controller('mainCtrl', {
       $scope: scope
     });
   }));
 
-  it('should add items to the list', function () {
-    scope.todo = 'Test 1';
-    scope.addTodo();
-    expect(scope.todos.length).toBe(1);
-  });
+  it('should be the first test', function () {
 
-  it('should add then remove an item from the list', function () {
-    scope.todo = 'Test 1';
-    scope.addTodo();
-    scope.removeTodo(0);
-    expect(scope.todos.length).toBe(0);
   });
 
 });
