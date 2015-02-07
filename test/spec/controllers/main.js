@@ -1,34 +1,43 @@
 'use strict';
 /*jshint sub:true*/
 
-describe('with httpBackend', function() {
+describe('Login app ->', function () {
 
-beforeEach(module('loginApp'));
+  // load the controller's module
+  beforeEach(module('loginApp'));
 
- var loginCtrl, scope;
+  describe('mainCtrl', function () {
 
- // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+    var scope, httpBackend;
+
+    beforeEach(inject(function ($rootScope, $controller, $httpBackend) {
       scope = $rootScope.$new();
-      loginCtrl = $controller('loginCtrl', {
-      $scope: scope
+      httpBackend = $httpBackend;
+
+      $controller('mainCtrl', {
+        $scope: scope
+      });
+
+      httpBackend
+        .when('POST', 'http://h139-233.rackhostvps.com/auth', {applicationToken: 'e4d909c290d0fb1ca068ffaddf22cbd0'})
+        .respond({clientToken:'883ccf2adecbb228bdd5a709adeb3142cb67f524'});
+
+      scope.submitToken();
+      httpBackend.flush();
+    }));
+
+    afterEach (function () {
+     httpBackend.verifyNoOutstandingExpectation();
+     httpBackend.verifyNoOutstandingRequest();
     });
 
-    // $httpBackend.when('GET', 'https://api.github.com/users/jasonmore').respond({things: 'and stuff'});
-    // $httpBackend.flush();
-  }));
-
-it('should get login success',
-  inject(function(LoginService, $httpBackend) {
-
-    $httpBackend.expect('POST', 'https://api.mydomain.com/login').respond({ success : true });
-
-    LoginService.login('test@test.com', 'password')
-      .then(function(data) {
-        expect(data.success).toBeTruthy();
-        // expect(1).toBe(1);
+    it('should have 1 token', function () {
+      expect(scope.clientToken).toBe('883ccf2adecbb228bdd5a709adeb3142cb67f524');
     });
 
-  $httpBackend.flush();
-}));
+    it('should be array', function() {
+      expect(scope.clientToken).toContain('709');
+    });
+  });
+
 });
