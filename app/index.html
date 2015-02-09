@@ -15,15 +15,15 @@
 
 	<form name="loginForm" novalidate>
 	  <input type="text" class="form-control" name="token" ng-model="validToken" placeholder="Enter valid token">
-	  <button id="buttonPOST" type="button" class="btn btn-info" ng-click="submitToken()" ng-disabled="clientToken">
+	  <button id="buttonPOST" name="loginBtn" type="button" class="btn btn-info" ng-click="submitToken()" ng-disabled="clientToken">
 	  <span ng-hide="clientToken">Send authentication request</span>
 	  <span ng-show="clientToken">Code is received and locally stored</span>
 	  </button>
 	  <div>{{responseMessage}}</div>
-	  <div>{{clientToken}}</div>
+      <div>{{clientToken}}</div>
 	</form>
 
-    <!-- build:js(.) scripts/vendor.js -->
+    <!-- build:vendor.js(.) -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -36,6 +36,7 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/SHA-1/sha1.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
